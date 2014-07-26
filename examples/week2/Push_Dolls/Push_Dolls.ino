@@ -2,7 +2,7 @@ int motorPin1 = 8;
 int motorPin2 = 9;
 int motorPin3 = 10;
 int motorPin4 = 11;
-int delayTime = 2500;
+int delayTime = 1900;
 
 int count = 0;
 int dir = 0;
@@ -12,52 +12,70 @@ void setup() {
   pinMode(motorPin2, OUTPUT);
   pinMode(motorPin3, OUTPUT);
   pinMode(motorPin4, OUTPUT);
-  for(int i=0;i<160;i++)
-    {
-      digitalWrite(3, HIGH);   // turn the LED on (HIGH is the voltage level)
-      delayMicroseconds(500);  
-      digitalWrite(3, LOW);    // turn the LED off by making the voltage LOW
-      delay(20);               // wait for a second
-    }
+  
   pinMode(2, INPUT);  
-  pinMode(3, OUTPUT);     
+  pinMode(7, OUTPUT); 
+
+  Serial.begin(9600);  
+  gohome();
 }
 
+void gohome()
+{
+  for(int i=0;i<100;i++)
+    {
+      digitalWrite(7, HIGH);   // turn the LED on (HIGH is the voltage level)
+      delayMicroseconds(500);  
+      digitalWrite(7, LOW);    // turn the LED off by making the voltage LOW
+      delay(20);               // wait for a second
+    }
+}
 
 void loop() {
-  /*
+  
   int buttonState = digitalRead(2);
-  if (buttonState == HIGH) 
-  {     
-    for(int i=0;i<160;i++)
+  Serial.println(buttonState);
+  if(buttonState == 1)
+  {
+    go();
+  }
+  
+  if(dir == 1)
+  {
+    Clockwise();
+  }
+  else
+  {
+    CounterClockwise();
+  }
+  
+  if(++count > 1100)
+  {
+    count = 0;
+    dir = (dir+1)%2;
+  }
+  
+  if(dir == 0)  Serial.println(count);
+  else Serial.println(1100-count);
+}
+
+void go()
+{
+    for(int i=0;i<180;i++)
     {
-      digitalWrite(3, HIGH);   // turn the LED on (HIGH is the voltage level)
+      digitalWrite(7, HIGH);   // turn the LED on (HIGH is the voltage level)
       delayMicroseconds(2400);  
-      digitalWrite(3, LOW);    // turn the LED off by making the voltage LOW
+      digitalWrite(7, LOW);    // turn the LED off by making the voltage LOW
       delay(20);               // wait for a second
     }
     
-    for(int i=0;i<160;i++)
+    for(int i=0;i<200;i++)
     {
-      digitalWrite(3, HIGH);   // turn the LED on (HIGH is the voltage level)
+      digitalWrite(7, HIGH);   // turn the LED on (HIGH is the voltage level)
       delayMicroseconds(500);  
-      digitalWrite(3, LOW);    // turn the LED off by making the voltage LOW
+      digitalWrite(7, LOW);    // turn the LED off by making the voltage LOW
       delay(20);               // wait for a second
     }
-  } 
-  
-  count++;
-  if(dir == 0)
-    CounterClockwise();
-  else
-    Clockwise();
-   
-   if(count > 1100)
-   {
-     count = 0;
-     dir = (dir+1)%2;
-   }
-  */
 }
 
 void Clockwise()
@@ -120,6 +138,8 @@ void CounterClockwise()
   digitalWrite(motorPin4, LOW);
   //delay(delayTime);
   delayMicroseconds(delayTime);
+
 }
+
 
 
