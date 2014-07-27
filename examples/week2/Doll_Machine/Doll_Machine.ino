@@ -181,21 +181,27 @@
 //
 //#define NOTE_DS8 4978
 
-Servo servoX, servoY; 
+Servo servoX, servoY,servodown; 
 
 const byte pinX = A0;
 const byte pinY = A1;
 
 int valX, posX;
 int valY, posY;
+int button=5;
+int pin4=4;
+ 
 //int melody[] = {NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_A5, NOTE_B5, NOTE_C6};
 int duration = 500;  // 500 miliseconds
 
 void setup() 
 { 
+  pinMode(button,INPUT);
+  pinMode(pin4,OUTPUT);
   Serial.begin(9600);
   servoX.attach(2);
   servoY.attach(3);
+ 
 } 
  
 void loop() 
@@ -252,5 +258,36 @@ void loop()
    
   servoX.write(posX);
   servoY.write(posY);
+  int button_value=digitalRead(button);
+  int s1,s2;
+  if(button_value==LOW)
+  {
+     s1 = millis();
+     s2 = s1;
+  while (s1-s2 <= 400 )//0
+  {
+  digitalWrite(pin4,HIGH);
+  delayMicroseconds(500);
+  //delay(1);
+  digitalWrite(pin4,LOW);
+  delayMicroseconds(19500);
+  //delay(19);
+  s1 = millis();
+  }
+       s1=millis();
+    s2=s1;
+ while(s1-s2 <= 400)//180
+ {
+  digitalWrite(pin4,HIGH);
+  delayMicroseconds(2500);
+  //delay(2);
+  digitalWrite(pin4,LOW);
+ delayMicroseconds(17500);
+  //delay(18);
+  s1=millis();
+ }
+ 
+  }
   delay(15);
-} 
+
+}
