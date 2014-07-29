@@ -2,6 +2,8 @@
 
 This is an Arduino Project about an automatic door in a maze just for a cute mouse,YiJu.
 And the project use one Servo Motor(SG-90) and two PING sensor(HC-SR04).
+Watch Demo Video : https://www.youtube.com/watch?v=cLZzOXgM3yY
+
 
 + First PING sensor will detect the mouse enter the maze.
 When the mouse gets closer between 7 cm distance. The first PING sensor will trigger door opened.
