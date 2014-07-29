@@ -1,6 +1,6 @@
 #       Arduino_CubeLED_With_Four_Effects
-##	This is an Arduino Project about 3*3*3 LED Cube.
-##	And there are four effects in this LED Cube.
+This is an Arduino Project about 3*3*3 LED Cube.
+And there are four effects in this LED Cube.
 
 + 	First effect is that 27 LEDs will blink one by one.   
 
